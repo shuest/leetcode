@@ -18,3 +18,4 @@
 *.exe
 *.cache
 *.manifest
+*.user
