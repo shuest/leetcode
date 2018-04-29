@@ -19,22 +19,21 @@ using namespace std;
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-       ListNode* dummyHead=new ListNode(0);
-	   dummyHead->next=head;
-	   map<int,int> mp;
-	   ListNode *cur=dummyHead;
-	   while(cur->next!=NULL)
-	   {
-		   mp[cur->next->val]++;
-		   if(mp[cur->next->val]>=2)
-		   {
-			   ListNode *deleteNode=cur->next;
-			   cur->next=deleteNode->next;
-			   delete deleteNode;
-		   }
-	   }
-	   ListNode *retNode=dummyHead->next;
-	   delete dummyHead;
-	   return retNode;
+		if(head==NULL||head->next==NULL)
+			return head;
+		ListNode* p=head->next;
+		if(p->val!=head->val)
+		{
+			head->next=deleteDuplicates(p);
+			//指向下一个元素，由于考虑空的情况，故不用p->next
+			return head;
+		}
+		else
+		{
+			while(p!=NULL&&p->val==head->val)
+				//只要后面还有，重复的
+				p=p->next;
+			return deleteDuplicates(p);
+		}
     }
 };
