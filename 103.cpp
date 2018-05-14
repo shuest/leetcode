@@ -17,7 +17,7 @@ using namespace std;
       TreeNode *right;
       TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  };
- 
+ /*
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
@@ -45,4 +45,43 @@ public:
 		}
 		return res;
     }
-};
+};*/
+ class Solution{
+ public:
+	 vector<vector<int>> zigzagLevelOrder(TreeNode *root)
+	 {
+		vector<int> row;
+		vector<vector<int>> v;
+		queue<TreeNode*> q;
+		if(root==NULL)
+			return v;
+		q.push(root);
+		TreeNode *temp;
+		int level=0;
+		while(!q.empty())
+		{
+			int size=q.size();	//下一行所有元素数
+			while(size--)
+			{
+				temp=q.front();
+				q.pop();
+				row.push_back(temp->val);
+				if(temp->left!=NULL)
+					q.push(temp->left);
+				if(temp->right!=NULL)
+					q.push(temp->right);
+			}
+			if(level%2==1)	//奇数行 逆置
+			{
+				int n=row.size();
+				for(int i=0;i<n/2;i++)
+					swap(row[i],row[n-i-1]);
+			}
+			v.push_back(row);
+			level++;
+			row.clear();
+		}
+		return v;
+	 }
+
+ };
