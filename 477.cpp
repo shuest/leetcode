@@ -11,27 +11,19 @@
 #include<queue>
 using namespace std;
 
-
+//对于每一位求所有1的个数是cnt，0的个数是n-cnt，相组合即相乘
 class Solution {
 public:
     int totalHammingDistance(vector<int>& nums) {
-		int result = 0, n = nums.size();
-		for(int i = 0; i < n ; i++) {
-			for(int j = i + 1; j < n; j ++)
-			{
-				result += ham(nums[i],nums[j]);
-			}	
-		}
-		return result;
+        int result = 0, n = nums.size();
+        for(int i = 0; i < 32; i++) {
+            int cnt = 0;
+            for(int j = 0; j < n; j++) {
+                if(nums[j] >> i & 1 == 1)
+                    cnt++;
+            }
+            result += cnt * (n - cnt);
+        }
+        return result;
     }
-	int ham(int a,int b) {
-		if(b > a) 
-			swap(a,b);
-		int cnt = 0;
-		while(a != b)
-		{
-			a=a & (a-1);
-		}
-		return cnt;
-	}
 };
