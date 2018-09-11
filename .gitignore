@@ -20,3 +20,4 @@
 *.manifest
 *.user
 *.h
+main/main.VC.db

@@ -10,42 +10,20 @@
 #include<stack>
 #include<queue>
 using namespace std;
-
-class solution{
+class Solution {
 public:
-	vector<vector<int>> loadBalancing (vector<int> jobTime,int machineNum) {
-		this->jobTime = jobTime;
-		this->machineNum = machineNum;
-		for(int i = 0; i < jobTime.size(); i++) {
-		
+    vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
+        vector<int> result;
+		stack<int> s;
+		map<int,int> m;
+		for(int i = nums.size() - 1; i >= 0; i--) {
+			while(!s.empty() && s.top() <= nums[i])
+				s.pop();  //小的都弹出，剩下的都是大的了，多个的时候只看最近的一个
+			m[nums[i]] = s.empty() ? -1 : s.top();
+			s.push(nums[i]);
 		}
-	}
-private:
-	vector<int> jobTime;
-	int maxTime ,tempMaxtime ,machineNum;
-	vector<vector<int>> resultNum(machineNum),resultTime(machineNum),tempNum(machineNum),tempTime(machineNum);
-	void dfs(int index,int machine) {
-		if(index > jobTime.size())
-			 return;
-		if(index == jobTime.size()) {
-			for(int i = 0; i < tempTime.size(); i++)
-			{
-				tempMaxTime = max(tempMaxTime,tempTime[i]);
-			}
-			if(tempMaxTime < maxTime) {
-				maxTime = tempMaxTime;
-				resultNum = tempNum;
-			}
-			return;
-		}
-		for(int i = 0; i < machinNum; i++) {
-			tempNum[i].push(index + 1);
-			tempTime[i] += jobTime[index + 1];
-			dfs(index + 1, i);
-			tempTime[i] -= jobTime[index + 1];
-			tempNum[i].pop_back();
-		}
-
-	}
-
+		for(int i = 0; i < findNums.size(); i++) 
+			result.push_back(m[findNums[i]]);
+		return result;
+    }
 };
