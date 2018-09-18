@@ -11,14 +11,16 @@
 #include<queue>
 using namespace std;
 
-
 class Solution {
 public:
-    bool judgeCircle(string moves) {
-        map<char,int> m;
-		for(int i = 0; i < moves.size(); i++) {
-			m[moves[i]]++;
+    int findLengthOfLCIS(vector<int>& nums) {
+		int temp = 1,ans = 1;
+		if(nums.size() == 0)
+			return 0;
+		for(int i = 1; i < nums.size(); i++) {
+			temp = (nums[i - 1] < nums[i])? temp +1: 1;
+			ans = max(ans,temp);
 		}
-		return ((m['L'] == m['R']) && (m['U'] == m['D']));
+		return ans;
     }
 };

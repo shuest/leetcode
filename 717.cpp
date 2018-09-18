@@ -11,14 +11,15 @@
 #include<queue>
 using namespace std;
 
-
 class Solution {
 public:
-    bool judgeCircle(string moves) {
-        map<char,int> m;
-		for(int i = 0; i < moves.size(); i++) {
-			m[moves[i]]++;
+    bool isOneBitCharacter(vector<int>& bits) {
+        int i = 0;
+		while ( i < bits.size()) {
+			if( i == (bits.size() - 1) ) return true;
+			if(bits[i] == 0) i++;
+			else i += 2;
 		}
-		return ((m['L'] == m['R']) && (m['U'] == m['D']));
+		return false;
     }
 };
