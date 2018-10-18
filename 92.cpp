@@ -22,36 +22,29 @@ using namespace std;
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        ListNode *p,*begin,*end;
-		p = head;
-		int temp = 1;
-		while(p != NULL) {
-			if(temp == m) 
-				begin = p;
-			if(temp == n) {
-				end = p;
-				break;
-			}
-			p = p->next;
-			temp++;
+        if(head == NULL || m == n)
+			return head;
+		ListNode *dummy_head = new ListNode(-1);
+		dummy_head->next = head;
+		m++;n++;
+		int count = n - m;
+		ListNode* p_m = dummy_head;
+		ListNode* p_m_previous = dummy_head;
+		while(m > 1) {
+			p_m_previous = p_m;
+			p_m = p_m->next;
+			m--;
 		}
-		ListNode node(0);
-		node.next = begin;
-		p = begin->next;
-		while(p != end) {
-			node.next = p->next;
-			node.next = p;
-			p = p->next;
+		ListNode *p = p_m;
+		ListNode *q = p_m->next;
+		ListNode *r = q->next;
+		while(count > 0) {
+			q->next = p;
+			p = q;
+			q = r;
+			if(r != NULL) r = r->next;
+			ount--;
 		}
-		p->next = end->next;
-		begin->next = node.next;
-		return head;
-	}
-	ListNode *reverse(ListNode* & begin,ListNode* & end) {
-		ListNode dummy(0);
-		ListNode *t; t = begin;
-		while(t != end) {
-			
-		}
+		p_m_previous->next = p
 	}
 };
