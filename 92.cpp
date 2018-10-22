@@ -22,29 +22,29 @@ using namespace std;
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        if(head == NULL || m == n)
+		if(head == NULL || m == n)
 			return head;
-		ListNode *dummy_head = new ListNode(-1);
-		dummy_head->next = head;
-		m++;n++;
+		ListNode* dummyhead = new ListNode(-1);
+		dummyhead->next = head;
+		ListNode *p_m = dummyhead,*p_m_previous = dummyhead;
 		int count = n - m;
-		ListNode* p_m = dummy_head;
-		ListNode* p_m_previous = dummy_head;
-		while(m > 1) {
+		while(m>0) {
 			p_m_previous = p_m;
 			p_m = p_m->next;
 			m--;
 		}
-		ListNode *p = p_m;
-		ListNode *q = p_m->next;
-		ListNode *r = q->next;
-		while(count > 0) {
+		ListNode *p = p_m,*q = p_m->next,*r = q->next;
+		while(count>0) {
 			q->next = p;
 			p = q;
 			q = r;
-			if(r != NULL) r = r->next;
-			ount--;
+			if(r !=NULL)
+				r = r->next;
+			count--;
 		}
-		p_m_previous->next = p
+		p_m_previous->next = p;
+		p_m->next = q;
+		head = dummyhead->next;
+		return head;
 	}
 };
