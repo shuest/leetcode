@@ -26,7 +26,6 @@ public:
 		if(root== NULL)
 			return;
         root = preorder(root);
-		sort(in.begin(),in.end());
 		root->val = in[0];
 		for(int i = 1; i < in.size(); i++) {
 			if(root->right!= NULL)
